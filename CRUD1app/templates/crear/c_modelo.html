@@ -1,0 +1,15 @@
+{% extends "plantilla.html" %}
+
+{% block title %}Crear modelo{% endblock %}
+
+
+{% block content %}
+<h1 class="display-1">Crear modelo</h1>
+
+<form action="/your-name/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock content %}
