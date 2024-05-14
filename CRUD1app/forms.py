@@ -1,5 +1,22 @@
 from django import forms
+from django.forms import ModelForm
+from .models import *
 
 
-class modelo(forms.Form):
-    Modelo = forms.CharField(label="Ingresar Modelos", max_length=100)
+    
+class ModeloForm(ModelForm):
+    class Meta:
+        model = Modelo_E
+        fields = ['modelos', 'marca', 'tipos']
+        
+
+class UsuarioForm(ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ["nombre","apellido", "correo","tipos"]
+        
+        
+class EquipoForm(ModelForm):
+    class Meta:
+        model = Equipos
+        fields = ["usuario","marca","modelo","tipo"]

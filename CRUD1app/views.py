@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
 from .forms import *
 
@@ -13,32 +13,57 @@ def home(request):
 
 def listar(request):
     
+    
+    
     return render(request, 'lista.html')
 
 
 
 def c_modelo (request):
-    # if this is a POST request we need to process the form data
-    if request.method == "POST":
-        # create a form instance and populate it with data from the request:
-        form = modelo(request.POST)
-        # check whether it's valid:
+    
+    if request.method == 'POST':
+        # Si el formulario ha sido enviado, procesar los datos
+        form = ModeloForm(request.POST)
         if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect("lista.html")
-
-    # if a GET (or any other method) we'll create a blank form
+            instance = form.save()  # Obtener la instancia del modelo guardado
+            print("Datos guardados exitosamente:", instance)
+            # Redirigir a alguna página de éxito
+            return redirect('c_modelo')  # Ajusta esto según la URL de tu página de éxito
+        else:
+            print("Formulario inválido:", form.errors)
     else:
-        form = modelo()
-
-    return render (request, "crear/c_modelo.html", {"form": form})
+        # Si la solicitud no es un POST, mostrar el formulario en blanco
+        form = ModeloForm()
+    
+    return render(request, 'crear/c_modelo.html', {'form': form})
 
 
 def c_usuario(request):
-    return render (request,'crear/c_usuario.html')
+    
+    if request.method == 'POST':
+        form = UsuarioForm(request.POST)
+        if form.is_valid():
+            instance = form.save()
+            print("Datos guardados exitosamente:", instance)
+            return redirect('c_usuario')
+        else: 
+            print ("Formulario inválido:", form.errors)
+    else:
+        form = UsuarioForm()
+    
+    return render (request,'crear/c_usuario.html',{'form':form})
 
 
 def c_equipo(request):
-    return render (request,'crear/c_equipo.html')
+    form = EquipoForm()  # Inicializar el formulario fuera de la lógica condicional
+
+    if request.method == 'POST':
+        form = EquipoForm(request.POST)
+        if form.is_valid():
+            instance = form.save()
+            print("Datos guardados exitosamente:", instance)
+            return redirect('c_equipo')
+        else:
+            print ("Formulario Invalido:", form.errors)
+
+    return render (request,'crear/c_equipo.html', {'form':form})

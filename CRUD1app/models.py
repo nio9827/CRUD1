@@ -24,19 +24,19 @@ class Modelo_E(models.Model):
     modelos = models.CharField(max_length=50)
     fecha_creacion = models.DateField(auto_now_add=True)
     marca = models.ForeignKey(Marca_E, on_delete=models.CASCADE)
-    tipos = models.ForeignKey(Tipo_E, on_delete=models.CASCADE,unique=True, null=True)
+    tipos = models.ForeignKey(Tipo_E, on_delete=models.CASCADE, null=True)
     def __str__(self):
-        return f"{self.modelos}{self.fecha_creacion}{self.marca}"
+        return f"{self.modelos}"
 
 class Usuario(models.Model):
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
     correo = models.EmailField()
-    tipos = models.ForeignKey(Tipo_E, on_delete=models.CASCADE,unique=True, null=True)
+    tipos = models.ForeignKey(Tipo_E, on_delete=models.CASCADE, null=True)
     fecha_creacion = models.DateField(auto_now_add=True)
     
     def __str__(self):
-        return f"{self.nombre}{self.apellido}{self.correo}{self.fecha_creacion}"
+        return f"{self.nombre} {self.apellido}"
     
 class Equipos(models.Model):
     marca = models.ForeignKey(Marca_E, on_delete=models.CASCADE)
@@ -46,4 +46,4 @@ class Equipos(models.Model):
     fecha_creacion = models.DateField(auto_now_add=True)
     
     def __str__(self):
-        return f"{self.marca}{self.modelo}{self.usuario}{self.tipo}{self.fecha_creacion}"
+        return f"{self.usuario}"
