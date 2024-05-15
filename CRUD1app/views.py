@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
 from .forms import *
-
+from .models import *
 # Create your views here.
 
 def plantilla (request):
@@ -12,10 +12,12 @@ def home(request):
     return render(request, 'home.html')
 
 def listar(request):
+
+    all_object = Equipos.objects.all()
     
     
     
-    return render(request, 'lista.html')
+    return render(request, 'lista.html',{'all_object':all_object})
 
 
 

@@ -1,10 +1,33 @@
-{% extends "plantilla.html" %}
-
-{% block title %}Lista{% endblock %}
-
+{% extends "plantilla.html" %} {% block title %}Lista{% endblock %} 
 
 {% block content%}
-
 <h1 class="display-3">lista</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Modelo</th>
+      <th scope="col">Marca</th>
+      <th scope="col">Tipo</th>
+      <th scope="col">Fecha Creacion</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for equipo in all_object %}
+    <tr>
+        <td>{{ equipo.usuario }}</td>
+        <td>{{ equipo.modelo }}</td>
+        <td>{{ equipo.marca }}</td>
+        <td>{{ equipo.tipo }}</td>
+        <td>{{ equipo.fecha_creacion }}</td>
+    </tr>
+{% empty %}
+    <tr>
+        <td colspan="5">No hay equipos disponibles.</td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
 
 {% endblock%}

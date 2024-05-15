@@ -46,4 +46,4 @@ class Equipos(models.Model):
     fecha_creacion = models.DateField(auto_now_add=True)
     
     def __str__(self):
-        return f"{self.usuario}"
+        return f"{self.usuario} {self.modelo} {self.marca} {self.tipo} {self.fecha_creacion}"
