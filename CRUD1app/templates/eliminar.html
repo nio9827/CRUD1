@@ -1,0 +1,17 @@
+{% extends "plantilla.html" %}
+
+{% block title %}Eliminar{% endblock title %}
+
+
+{% block content %}
+
+<h1 class="display-4">Eliminar Registro</h1>
+
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Eliminar</button>
+</form>
+
+{% endblock content %}

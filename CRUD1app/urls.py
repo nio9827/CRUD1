@@ -8,4 +8,6 @@ urlpatterns = [
     path('c_modelo', views.c_modelo, name='c_modelo'),
     path('c_usuario', views.c_usuario, name='c_usuario'),
     path('c_equipo', views.c_equipo, name='c_equipo'),
+    path('actualizar/<int:id>/', views.actualizar, name='actualizar'),
+    path('eliminar/<int:id>/', views.eliminar, name='eliminar'),
 ]

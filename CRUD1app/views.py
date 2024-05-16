@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponseRedirect
 from .forms import *
 from .models import *
@@ -14,8 +14,6 @@ def home(request):
 def listar(request):
 
     all_object = Equipos.objects.all()
-    
-    
     
     return render(request, 'lista.html',{'all_object':all_object})
 
@@ -69,3 +67,30 @@ def c_equipo(request):
             print ("Formulario Invalido:", form.errors)
 
     return render (request,'crear/c_equipo.html', {'form':form})
+
+
+
+
+def actualizar (request ,id):
+    libro = get_object_or_404(Equipos, pk=id)
+    
+    if request.method == 'POST':
+        form = EquipoForm(request.POST, instance=libro)
+        if form.is_valid():
+            form.save()
+            return redirect('/listar')
+    else:
+        form = EquipoForm(instance=libro)
+    
+    return render(request, 'actualizar.html', {'form': form})
+
+
+
+def eliminar  (request, id):
+    form = get_object_or_404(Equipos, pk=id)
+    
+    if request.method == 'POST':
+        form.delete()
+        return redirect('/listar')
+    
+    return render(request, 'eliminar.html', {'form': form})
